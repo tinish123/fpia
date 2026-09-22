@@ -1,0 +1,327 @@
+<!--
+<fill type="clb" priority="1"/>
+<perimeter type="io" priority="10"/>
+-->
+
+<!--
+Inputs to CLB = 10
+Width of LUT = 20
+Outputs from CLB = 15   (20 would be square blocks)
+
+following soft block described in https://docs.verilogtorouting.org/en/latest/tutorials/arch/classic_soft_logic/
+except for mux
+-->
+
+<architecture>
+
+    <models>
+    </models>
+
+<!--  ****************  NEW SECTION START  ********************* -->
+  <tiles>
+    <tile name="io" area="0">
+      <sub_tile name="io" capacity="3">
+        <equivalent_sites>
+          <site pb_type="io" pin_mapping="direct"/>
+        </equivalent_sites>
+        <input name="outpad" num_pins="1"/>
+        <output name="inpad" num_pins="1"/>
+        <clock name="clock" num_pins="1"/>
+        <fc in_type="frac" in_val="1.0" out_type="frac" out_val="0.25"/>
+        <pinlocations pattern="custom">
+          <loc side="left">io.outpad io.inpad io.clock</loc>
+          <loc side="top">io.outpad io.inpad io.clock</loc>
+          <loc side="right">io.outpad io.inpad io.clock</loc>
+          <loc side="bottom">io.outpad io.inpad io.clock</loc>
+        </pinlocations>
+      </sub_tile>
+
+    </tile>
+    <tile name="clb">
+      <sub_tile name="clb">
+        <equivalent_sites>
+          <site pb_type="clb" pin_mapping="direct"/>
+        </equivalent_sites>
+	<input name="FI" num_pins="{{ NUM_INPUTS_FA - NUM_OUTPUTS_BA }}" equivalent="full"/>
+	<input name="BI" num_pins="{{ NUM_INPUTS_BA - NUM_OUTPUTS_FA }}" equivalent="full"/>
+	<output name="FO" num_pins="{{ NUM_OUTPUTS_FA }}" equivalent="instance"/>
+	<output name="BO" num_pins="{{ NUM_OUTPUTS_BA }}" equivalent="instance"/>
+        <clock name="clk" num_pins="1"/>
+		
+        <!--<fc in_type="frac" in_val="{{ FC_IN }}" out_type="frac" out_val="{{ FC_OUT }}"/>-->
+		
+		<fc_override fc_type="frac" fc_val="0.0" port_name="FI" segment_name="clause_L4"/>
+		<fc_override fc_type="frac" fc_val="0.0" port_name="FI" segment_name="clause_L1"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_IN }}" port_name="FI" segment_name="var_L4"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_IN }}" port_name="FI" segment_name="var_L1"/>
+		
+		<fc_override fc_type="frac" fc_val="0.0" port_name="BO" segment_name="clause_L4"/>
+		<fc_override fc_type="frac" fc_val="0.0" port_name="BO" segment_name="clause_L1"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_OUT }}" port_name="BO" segment_name="var_L4"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_OUT }}" port_name="BO" segment_name="var_L1"/>
+		
+		<fc_override fc_type="frac" fc_val="0.0" port_name="FO" segment_name="var_L4"/>
+		<fc_override fc_type="frac" fc_val="0.0" port_name="FO" segment_name="var_L1"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_OUT }}" port_name="FO" segment_name="clause_L4"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_OUT }}" port_name="FO" segment_name="clause_L1"/>
+		
+		<fc_override fc_type="frac" fc_val="0.0" port_name="BI" segment_name="var_L4"/>
+		<fc_override fc_type="frac" fc_val="0.0" port_name="BI" segment_name="var_L1"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_IN }}" port_name="BI" segment_name="clause_L4"/>
+		<fc_override fc_type="frac" fc_val="{{ FC_IN }}" port_name="BI" segment_name="clause_L1"/>
+		
+        <pinlocations pattern="spread"/>
+      </sub_tile>
+    </tile>
+
+  </tiles>
+
+<!--  ****************  NEW SECTION ENDS  ********************* -->
+
+
+  <!-- Physical descriptions begin -->
+    <layout>
+        <auto_layout aspect_ratio="1.000000">
+            <!--Perimeter of 'io' blocks with 'EMPTY' blocks at corners-->
+            <perimeter type="io" priority="100"/>
+            <corners type="EMPTY" priority="101"/>
+            <!--Fill with 'clb'-->
+            <fill type="clb" priority="10"/>
+        </auto_layout>
+    </layout>
+
+	<device>
+		<sizing R_minW_nmos="6065.520020" R_minW_pmos="18138.500000"/>
+		<area grid_logic_tile_area="7238.080078"/>
+		<chan_width_distr>
+		<x distr="uniform" peak="1.000000"/>
+			<y distr="uniform" peak="1.000000"/>
+		</chan_width_distr>
+		<default_fc in_type="frac" in_val="{{ FC_IN }}" out_type="frac" out_val="{{ FC_OUT }}"/>
+   <!-- <switch_block type="wilton" fs="3"/> -->
+		<switch_block type="custom"/>
+        <connection_block input_switch_name="ipin_cblock"/>
+    </device>
+
+	<switchlist>
+		<switch type="mux" name="mux_L4" R="0.000000" Cin="0.000000e+00" Cout="0.000000e+00" Tdel="7.958000e-11" mux_trans_size="2.074780" buf_size="19.261999"/>
+		<switch type="mux" name="mux_L1" R="0.000000" Cin="0.000000e+00" Cout="0.000000e+00" Tdel="5.681000e-11" mux_trans_size="1.867220" buf_size="10.700100"/>
+		<!--switch ipin_cblock resistance set to yeild for 4x minimum drive strength buffer-->
+        <switch type="mux" name="ipin_cblock" R="1516.380005" Cout="0." Cin="0.000000e+00" Tdel="7.362000e-11" mux_trans_size="1.240240" buf_size="auto"/>
+    </switchlist>
+
+	<segmentlist>
+		<segment name="var_L4" freq="0.24" length="4" type="unidir" Rmetal="0.000000" Cmetal="0.000000e+00">
+			<mux name="mux_L4"/>
+			<sb type="pattern">1 1 1 1 1</sb>
+			<cb type="pattern">1 0 1 0</cb>
+		</segment>
+		<segment name="clause_L4" freq="0.56" length="4" type="unidir" Rmetal="0.000000" Cmetal="0.000000e+00">
+			<mux name="mux_L4"/>
+			<sb type="pattern">1 1 1 1 1</sb>
+			<cb type="pattern">1 0 1 0</cb>
+		</segment>
+		<segment name="var_L1" freq="0.06" length="1" type="unidir" Rmetal="0.000000" Cmetal="0.000000e+00">
+			<mux name="mux_L1"/>
+			<sb type="pattern">1 1</sb>
+			<cb type="pattern">1</cb>
+		</segment>
+		<segment name="clause_L1" freq="0.14" length="1" type="unidir" Rmetal="0.000000" Cmetal="0.000000e+00">
+			<mux name="mux_L1"/>
+			<sb type="pattern">1 1</sb>
+			<cb type="pattern">1</cb>
+		</segment>
+	</segmentlist>
+	
+	<switchblocklist>
+		<switchblock name="wilton_turn" type="unidir">
+			<switchblock_location type="EVERYWHERE"/>
+			<switchfuncs>
+			  <func type="lt" formula="W-t"/>
+			  <func type="lb" formula="t-1"/>
+			  <func type="rt" formula="t-1"/>
+			  <func type="rb" formula="W-t-2"/>
+			  <func type="br" formula="W-t-2"/>
+			  <func type="bl" formula="t+1"/>
+			  <func type="tl" formula="W-t"/>
+			  <func type="tr" formula="t+1"/>
+			  
+			</switchfuncs>
+			<wireconn num_conns="from" from_type="var_L1" to_type="var_L1" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="var_L4" to_type="var_L4" from_switchpoint="0,2" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="var_L1" to_type="var_L4" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="var_L4" to_type="var_L1" from_switchpoint="0,2" to_switchpoint="0"/>
+			
+			<wireconn num_conns="from" from_type="clause_L1" to_type="clause_L1" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="clause_L4" to_type="clause_L4" from_switchpoint="0,2" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="clause_L1" to_type="clause_L4" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="clause_L4" to_type="clause_L1" from_switchpoint="0,2" to_switchpoint="0"/>
+		</switchblock>
+
+		<switchblock name="wilton_straight" type="unidir">
+			<switchblock_location type="EVERYWHERE"/>
+			<switchfuncs>
+			  <func type="lr" formula="t"/>
+			  <func type="bt" formula="t"/>
+			  <func type="rl" formula="t"/>
+			  <func type="tb" formula="t"/>
+			</switchfuncs>
+			<wireconn num_conns="from" from_type="var_L1" to_type="var_L1" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="var_L4" to_type="var_L4" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="var_L1" to_type="var_L4" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="var_L4" to_type="var_L1" from_switchpoint="0" to_switchpoint="0"/>
+			
+			<wireconn num_conns="from" from_type="clause_L1" to_type="clause_L1" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="clause_L4" to_type="clause_L4" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="clause_L1" to_type="clause_L4" from_switchpoint="0" to_switchpoint="0"/>
+			<wireconn num_conns="from" from_type="clause_L4" to_type="clause_L1" from_switchpoint="0" to_switchpoint="0"/>
+		</switchblock>
+	</switchblocklist>
+
+    <complexblocklist>
+
+        <!-- Define I/O pads begin -->
+        <!-- Capacity is a unique property of I/Os, it is the maximum number of I/Os that can be placed at the same (X,Y) location on the FPGA -->
+        <!-- <pb_type name="io" capacity="6"> -->
+	<pb_type name="io">
+            <input name="outpad" num_pins="1"/>
+            <output name="inpad" num_pins="1"/>
+            <clock name="clock" num_pins="1"/>
+
+            <!-- IOs can operate as either inputs or outputs.
+                Delays below come from Ian Kuon. They are small, so they should be interpreted as
+                the delays to and from registers in the I/O (and generally I/Os are registered
+                today and that is when you timing analyze them.
+                -->
+            <mode name="inpad">
+                <pb_type name="inpad" blif_model=".input" num_pb="1">
+                <output name="inpad" num_pins="1"/>
+                </pb_type>
+                <interconnect>
+                <direct name="inpad" input="inpad.inpad" output="io.inpad">
+                    <delay_constant max="4.791000e-11" in_port="inpad.inpad" out_port="io.inpad"/>
+                </direct>
+                </interconnect>
+            </mode>
+
+            <mode name="outpad">
+                <pb_type name="outpad" blif_model=".output" num_pb="1">
+                <input name="outpad" num_pins="1"/>
+                </pb_type>
+                <interconnect>
+                <direct name="outpad" input="io.outpad" output="outpad.outpad">
+                    <delay_constant max="1.557000e-11" in_port="io.outpad" out_port="outpad.outpad"/>
+                </direct>
+                </interconnect>
+            </mode>
+
+<!-- ******************* COMMENT OUT SECTION BELOW *******************************************  -->
+
+            <!-- Every input pin is driven by 15% of the tracks in a channel, every output pin is driven by 10% of the tracks in a channel -->
+            <!-- <fc in_type="frac" in_val="0.2" out_type="frac" out_val="0.1"/>    -->
+
+            <!-- IOs go on the periphery of the FPGA, for consistency, 
+                make it physically equivalent on all sides so that only one definition of I/Os is needed.
+                If I do not make a physically equivalent definition, then I need to define 4 different I/Os, one for each side of the FPGA
+                -->
+
+            <!-- <pinlocations pattern="custom">
+                <loc side="left">io.outpad io.inpad io.clock</loc>
+                <loc side="top">io.outpad io.inpad io.clock</loc>
+                <loc side="right">io.outpad io.inpad io.clock</loc>
+                <loc side="bottom">io.outpad io.inpad io.clock</loc>
+            </pinlocations>   -->
+<!-- *****************************************************************************************   -->
+
+            <!-- Place I/Os on the sides of the FPGA -->
+            <power method="ignore"/>
+        </pb_type>
+    <!-- Define I/O pads ends -->
+
+
+    <pb_type name="clb">
+        <input name="FI" num_pins="{{ NUM_INPUTS_FA - NUM_OUTPUTS_BA }}" equivalent="full"/>
+		<input name="BI" num_pins="{{ NUM_INPUTS_BA - NUM_OUTPUTS_FA }}" equivalent="full"/>
+        <output name="FO" num_pins="{{ NUM_OUTPUTS_FA }}" equivalent="instance"/>
+		<output name="BO" num_pins="{{ NUM_OUTPUTS_BA }}" equivalent="instance"/>
+        <clock name="clk" num_pins="1"/>
+
+        <pb_type name="ble_f" num_pb="{{ NUM_OUTPUTS_FA }}">
+            <input name="in" num_pins="{{ NUM_INPUTS_FA }}"/>
+            <output name="out" num_pins="1"/>
+            <clock name="clk" num_pins="1"/>
+
+            <pb_type name="lut_{{ NUM_INPUTS_FA }}" blif_model=".names" num_pb="1" class="lut">
+                <input name="in" num_pins="{{ NUM_INPUTS_FA }}" port_class="lut_in"/>
+                <output name="out" num_pins="1" port_class="lut_out"/>
+                            <delay_matrix type="max" in_port="lut_{{ NUM_INPUTS_FA }}.in" out_port="lut_{{ NUM_INPUTS_FA }}.out">{% for _ in range(NUM_INPUTS_FA) %}
+                                2.063000e-10{% endfor %}
+                            </delay_matrix>
+            </pb_type>
+
+            <pb_type name="ff" blif_model=".latch" num_pb="1" class="flipflop">
+                <input name="D" num_pins="1" port_class="D"/>
+                <output name="Q" num_pins="1" port_class="Q"/>
+                <clock name="clk" num_pins="1" port_class="clock"/>
+                            <T_setup value="0.000000e-10" port="ff.D" clock="clk"/>
+                            <T_clock_to_Q max="8.406000e-11" port="ff.Q" clock="clk"/>
+            </pb_type>
+
+            <interconnect>
+                <direct name="direct1" input="ble_f.in" output="lut_{{ NUM_INPUTS_FA }}[0:0].in"/>
+                <direct name="direct2" input="lut_{{ NUM_INPUTS_FA }}.out" output="ff.D">
+                    <pack_pattern name="ble_f{{ NUM_INPUTS_FA }}FF" in_port="lut_{{ NUM_INPUTS_FA }}.out" out_port="ff.D"/>
+                </direct>
+                <direct name="direct4" input="ff.Q" output="ble_f.out"/>
+                <direct name="direct3" input="ble_f.clk" output="ff.clk"/>
+                <!--<mux name="mux1" input="ff.Q lut_20.out" output="ble.out">
+                </mux> -->
+            </interconnect>
+        </pb_type>
+		
+		
+		<pb_type name="ble_b" num_pb="{{ NUM_OUTPUTS_BA }}">
+            <input name="in" num_pins="{{ NUM_INPUTS_BA }}"/>
+            <output name="out" num_pins="1"/>
+            <clock name="clk" num_pins="1"/>
+
+            <pb_type name="lut_{{ NUM_INPUTS_BA }}" blif_model=".names" num_pb="1" class="lut">
+                <input name="in" num_pins="{{ NUM_INPUTS_BA }}" port_class="lut_in"/>
+                <output name="out" num_pins="1" port_class="lut_out"/>
+                            <delay_matrix type="max" in_port="lut_{{ NUM_INPUTS_BA }}.in" out_port="lut_{{ NUM_INPUTS_BA }}.out">{% for _ in range(NUM_INPUTS_BA) %}
+                                2.063000e-10{% endfor %}
+                            </delay_matrix>
+            </pb_type>
+
+            <interconnect>
+                <direct name="direct1" input="ble_b.in" output="lut_{{ NUM_INPUTS_BA }}[0:0].in"/>
+                <direct name="direct2" input="lut_{{ NUM_INPUTS_BA }}.out" output="ble_b.out"/>
+            </interconnect>
+        </pb_type>
+
+        <!-- We use a full crossbar to get logical equivalence at inputs of CLB  -->
+        <interconnect>
+            <complete name="crossbar1" input="clb.FI ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].out" output="ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].in">
+                    <delay_constant max="5.043000e-11" in_port="clb.FI" out_port="ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].in"/>
+                    <delay_constant max="5.031000e-11" in_port="ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].out" out_port="ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].in"/>
+                    </complete>
+					
+			<complete name="crossbar2" input="clb.BI ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].out" output="ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].in">
+                    <delay_constant max="5.043000e-11" in_port="clb.BI" out_port="ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].in"/>
+                    <delay_constant max="5.031000e-11" in_port="ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].out" out_port="ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].in"/>
+                    </complete>
+
+            <complete name="clks" input="clb.clk" output="ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].clk ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].clk"/>
+            <complete name="clbouts1" input="ble_f[{{ NUM_OUTPUTS_FA-1 }}:0].out" output="clb.FO"/>
+			<complete name="clbouts2" input="ble_b[{{ NUM_OUTPUTS_BA-1 }}:0].out" output="clb.BO"/>
+        </interconnect>
+
+        <!-- Describe complex block relation with FPGA -->
+        <fc in_type="frac" in_val="{{ FC_IN }}" out_type="frac" out_val="{{ FC_OUT }}"/>
+        <pinlocations pattern="spread"/>
+
+    </pb_type>
+
+  </complexblocklist>
+
+</architecture>

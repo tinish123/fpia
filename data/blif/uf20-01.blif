@@ -1,0 +1,337 @@
+.model top
+.inputs pclk
+.outputs _x1
+.latch _l1 _x1 re pclk 2
+.latch _l2 _x2 re pclk 2
+.latch _l3 _x3 re pclk 2
+.latch _l4 _x4 re pclk 2
+.latch _l5 _x5 re pclk 2
+.latch _l6 _x6 re pclk 2
+.latch _l7 _x7 re pclk 2
+.latch _l8 _x8 re pclk 2
+.latch _l9 _x9 re pclk 2
+.latch _l10 _x10 re pclk 2
+.latch _l11 _x11 re pclk 2
+.latch _l12 _x12 re pclk 2
+.latch _l13 _x13 re pclk 2
+.latch _l14 _x14 re pclk 2
+.latch _l15 _x15 re pclk 2
+.latch _l16 _x16 re pclk 2
+.latch _l17 _x17 re pclk 2
+.latch _l18 _x18 re pclk 2
+.latch _l19 _x19 re pclk 2
+.latch _l20 _x20 re pclk 2
+.latch _l21 _x21 re pclk 2
+.latch _l22 _x22 re pclk 2
+.latch _l23 _x23 re pclk 2
+.latch _l24 _x24 re pclk 2
+.latch _l25 _x25 re pclk 2
+.latch _l26 _x26 re pclk 2
+.latch _l27 _x27 re pclk 2
+.latch _l28 _x28 re pclk 2
+.latch _l29 _x29 re pclk 2
+.latch _l30 _x30 re pclk 2
+.latch _l31 _x31 re pclk 2
+.latch _l32 _x32 re pclk 2
+.latch _l33 _x33 re pclk 2
+.latch _l34 _x34 re pclk 2
+.latch _l35 _x35 re pclk 2
+.latch _l36 _x36 re pclk 2
+.latch _l37 _x37 re pclk 2
+.latch _l38 _x38 re pclk 2
+.latch _l39 _x39 re pclk 2
+.latch _l40 _x40 re pclk 2
+.latch _l41 _x41 re pclk 2
+.latch _l42 _x42 re pclk 2
+.latch _l43 _x43 re pclk 2
+.latch _l44 _x44 re pclk 2
+.latch _l45 _x45 re pclk 2
+.latch _l46 _x46 re pclk 2
+.latch _l47 _x47 re pclk 2
+.latch _l48 _x48 re pclk 2
+.latch _l49 _x49 re pclk 2
+.latch _l50 _x50 re pclk 2
+.latch _l51 _x51 re pclk 2
+.latch _l52 _x52 re pclk 2
+.latch _l53 _x53 re pclk 2
+.latch _l54 _x54 re pclk 2
+.latch _l55 _x55 re pclk 2
+.latch _l56 _x56 re pclk 2
+.latch _l57 _x57 re pclk 2
+.latch _l58 _x58 re pclk 2
+.latch _l59 _x59 re pclk 2
+.latch _l60 _x60 re pclk 2
+.latch _l61 _x61 re pclk 2
+.latch _l62 _x62 re pclk 2
+.latch _l63 _x63 re pclk 2
+.latch _l64 _x64 re pclk 2
+.latch _l65 _x65 re pclk 2
+.latch _l66 _x66 re pclk 2
+.latch _l67 _x67 re pclk 2
+.latch _l68 _x68 re pclk 2
+.latch _l69 _x69 re pclk 2
+.latch _l70 _x70 re pclk 2
+.latch _l71 _x71 re pclk 2
+.latch _l72 _x72 re pclk 2
+.latch _l73 _x73 re pclk 2
+.latch _l74 _x74 re pclk 2
+.latch _l75 _x75 re pclk 2
+.latch _l76 _x76 re pclk 2
+.latch _l77 _x77 re pclk 2
+.latch _l78 _x78 re pclk 2
+.latch _l79 _x79 re pclk 2
+.latch _l80 _x80 re pclk 2
+.latch _l81 _x81 re pclk 2
+.latch _l82 _x82 re pclk 2
+.latch _l83 _x83 re pclk 2
+.latch _l84 _x84 re pclk 2
+.latch _l85 _x85 re pclk 2
+.latch _l86 _x86 re pclk 2
+.latch _l87 _x87 re pclk 2
+.latch _l88 _x88 re pclk 2
+.latch _l89 _x89 re pclk 2
+.latch _l90 _x90 re pclk 2
+.latch _l91 _x91 re pclk 2
+.latch _l92 _x92 re pclk 2
+.latch _l93 _x93 re pclk 2
+.latch _l94 _x94 re pclk 2
+.latch _l95 _x95 re pclk 2
+.latch _l96 _x96 re pclk 2
+.latch _l97 _x97 re pclk 2
+.latch _l98 _x98 re pclk 2
+.latch _l99 _x99 re pclk 2
+.latch _l100 _x100 re pclk 2
+.latch _l101 _x101 re pclk 2
+.latch _l102 _x102 re pclk 2
+.latch _l103 _x103 re pclk 2
+.latch _l104 _x104 re pclk 2
+.latch _l105 _x105 re pclk 2
+.latch _l106 _x106 re pclk 2
+.latch _l107 _x107 re pclk 2
+.latch _l108 _x108 re pclk 2
+.latch _l109 _x109 re pclk 2
+.latch _l110 _x110 re pclk 2
+.latch _l111 _x111 re pclk 2
+.names _x4 _x18 _x19 _l21
+111 1
+.names _x3 _x18 _x5 _l22
+111 1
+.names _x5 _x8 _x15 _l23
+111 1
+.names _x20 _x7 _x16 _l24
+111 1
+.names _x10 _x13 _x7 _l25
+111 1
+.names _x12 _x9 _x17 _l26
+111 1
+.names _x17 _x19 _x5 _l27
+111 1
+.names _x16 _x9 _x15 _l28
+111 1
+.names _x11 _x5 _x14 _l29
+111 1
+.names _x18 _x10 _x13 _l30
+111 1
+.names _x3 _x11 _x12 _l31
+111 1
+.names _x6 _x17 _x8 _l32
+111 1
+.names _x18 _x14 _x1 _l33
+111 1
+.names _x19 _x15 _x10 _l34
+111 1
+.names _x12 _x18 _x19 _l35
+111 1
+.names _x8 _x4 _x7 _l36
+111 1
+.names _x8 _x9 _x4 _l37
+111 1
+.names _x7 _x17 _x15 _l38
+111 1
+.names _x12 _x7 _x14 _l39
+111 1
+.names _x10 _x11 _x8 _l40
+111 1
+.names _x2 _x15 _x11 _l41
+111 1
+.names _x9 _x6 _x1 _l42
+111 1
+.names _x11 _x20 _x17 _l43
+111 1
+.names _x9 _x15 _x13 _l44
+111 1
+.names _x12 _x7 _x17 _l45
+111 1
+.names _x18 _x2 _x20 _l46
+111 1
+.names _x20 _x12 _x4 _l47
+111 1
+.names _x19 _x11 _x14 _l48
+111 1
+.names _x16 _x18 _x4 _l49
+111 1
+.names _x1 _x17 _x19 _l50
+111 1
+.names _x13 _x15 _x10 _l51
+111 1
+.names _x12 _x14 _x13 _l52
+111 1
+.names _x12 _x14 _x7 _l53
+111 1
+.names _x7 _x16 _x10 _l54
+111 1
+.names _x6 _x10 _x7 _l55
+111 1
+.names _x20 _x14 _x16 _l56
+111 1
+.names _x19 _x17 _x11 _l57
+111 1
+.names _x7 _x1 _x20 _l58
+111 1
+.names _x5 _x12 _x15 _l59
+111 1
+.names _x4 _x9 _x13 _l60
+111 1
+.names _x12 _x11 _x7 _l61
+111 1
+.names _x5 _x19 _x8 _l62
+111 1
+.names _x1 _x16 _x17 _l63
+111 1
+.names _x20 _x14 _x15 _l64
+111 1
+.names _x13 _x4 _x10 _l65
+111 1
+.names _x14 _x7 _x10 _l66
+111 1
+.names _x5 _x9 _x20 _l67
+111 1
+.names _x10 _x1 _x19 _l68
+111 1
+.names _x16 _x15 _x1 _l69
+111 1
+.names _x16 _x3 _x11 _l70
+111 1
+.names _x15 _x10 _x4 _l71
+111 1
+.names _x4 _x15 _x3 _l72
+111 1
+.names _x10 _x16 _x11 _l73
+111 1
+.names _x8 _x12 _x5 _l74
+111 1
+.names _x14 _x6 _x12 _l75
+111 1
+.names _x1 _x6 _x11 _l76
+111 1
+.names _x13 _x5 _x1 _l77
+111 1
+.names _x7 _x2 _x12 _l78
+111 1
+.names _x1 _x20 _x19 _l79
+111 1
+.names _x2 _x13 _x8 _l80
+111 1
+.names _x15 _x18 _x4 _l81
+111 1
+.names _x11 _x14 _x9 _l82
+111 1
+.names _x6 _x15 _x2 _l83
+111 1
+.names _x5 _x12 _x15 _l84
+111 1
+.names _x6 _x17 _x5 _l85
+111 1
+.names _x13 _x5 _x19 _l86
+111 1
+.names _x20 _x1 _x14 _l87
+111 1
+.names _x9 _x17 _x15 _l88
+111 1
+.names _x5 _x19 _x18 _l89
+111 1
+.names _x12 _x8 _x10 _l90
+111 1
+.names _x18 _x14 _x4 _l91
+111 1
+.names _x15 _x9 _x13 _l92
+111 1
+.names _x9 _x5 _x1 _l93
+111 1
+.names _x10 _x19 _x14 _l94
+111 1
+.names _x20 _x9 _x4 _l95
+111 1
+.names _x9 _x2 _x19 _l96
+111 1
+.names _x5 _x13 _x17 _l97
+111 1
+.names _x2 _x10 _x18 _l98
+111 1
+.names _x18 _x3 _x11 _l99
+111 1
+.names _x7 _x9 _x17 _l100
+111 1
+.names _x15 _x6 _x3 _l101
+111 1
+.names _x2 _x3 _x13 _l102
+111 1
+.names _x12 _x3 _x2 _l103
+111 1
+.names _x2 _x3 _x17 _l104
+111 1
+.names _x20 _x15 _x16 _l105
+111 1
+.names _x5 _x17 _x19 _l106
+111 1
+.names _x20 _x18 _x11 _l107
+111 1
+.names _x9 _x1 _x5 _l108
+111 1
+.names _x19 _x9 _x17 _l109
+111 1
+.names _x12 _x2 _x17 _l110
+111 1
+.names _x4 _x16 _x5 _l111
+111 1
+.names _x33 _x42 _x50 _x58 _x63 _x68 _x69 _x76 _x77 _x79 _x87 _x93 _x108 _l1
+1111111111111 1
+.names _x41 _x46 _x78 _x80 _x83 _x96 _x98 _x102 _x103 _x104 _x110 _l2
+11111111111 1
+.names _x22 _x31 _x70 _x72 _x99 _x101 _x102 _x103 _x104 _l3
+111111111 1
+.names _x21 _x36 _x37 _x47 _x49 _x60 _x65 _x71 _x72 _x81 _x91 _x95 _x111 _l4
+1111111111111 1
+.names _x22 _x23 _x27 _x29 _x59 _x62 _x67 _x74 _x77 _x84 _x85 _x86 _x89 _x93 _x97 _x106 _x108 _x111 _l5
+111111111111111111 1
+.names _x32 _x42 _x55 _x75 _x76 _x83 _x85 _x101 _l6
+11111111 1
+.names _x24 _x25 _x36 _x38 _x39 _x45 _x53 _x54 _x55 _x58 _x61 _x66 _x78 _x100 _l7
+11111111111111 1
+.names _x23 _x32 _x36 _x37 _x40 _x62 _x74 _x80 _x90 _l8
+111111111 1
+.names _x26 _x28 _x37 _x42 _x44 _x60 _x67 _x82 _x88 _x92 _x93 _x95 _x96 _x100 _x108 _x109 _l9
+1111111111111111 1
+.names _x25 _x30 _x34 _x40 _x51 _x54 _x55 _x65 _x66 _x68 _x71 _x73 _x90 _x94 _x98 _l10
+111111111111111 1
+.names _x29 _x31 _x40 _x41 _x43 _x48 _x57 _x61 _x70 _x73 _x76 _x82 _x99 _x107 _l11
+11111111111111 1
+.names _x26 _x31 _x35 _x39 _x45 _x47 _x52 _x53 _x59 _x61 _x74 _x75 _x78 _x84 _x90 _x103 _x110 _l12
+11111111111111111 1
+.names _x25 _x30 _x44 _x51 _x52 _x60 _x65 _x77 _x80 _x86 _x92 _x97 _x102 _l13
+1111111111111 1
+.names _x29 _x33 _x39 _x48 _x52 _x53 _x56 _x64 _x66 _x75 _x82 _x87 _x91 _x94 _l14
+11111111111111 1
+.names _x23 _x28 _x34 _x38 _x41 _x44 _x51 _x59 _x64 _x69 _x71 _x72 _x81 _x83 _x84 _x88 _x92 _x101 _x105 _l15
+1111111111111111111 1
+.names _x24 _x28 _x49 _x54 _x56 _x63 _x69 _x70 _x73 _x105 _x111 _l16
+11111111111 1
+.names _x26 _x27 _x32 _x38 _x43 _x45 _x50 _x57 _x63 _x85 _x88 _x97 _x100 _x104 _x106 _x109 _x110 _l17
+11111111111111111 1
+.names _x21 _x22 _x30 _x33 _x35 _x46 _x49 _x81 _x89 _x91 _x98 _x99 _x107 _l18
+1111111111111 1
+.names _x21 _x27 _x34 _x35 _x48 _x50 _x57 _x62 _x68 _x79 _x86 _x89 _x94 _x96 _x106 _x109 _l19
+1111111111111111 1
+.names _x24 _x43 _x46 _x47 _x56 _x58 _x64 _x67 _x79 _x87 _x95 _x105 _x107 _l20
+1111111111111 1
+.end
